@@ -65,9 +65,20 @@ public class Car implements CarRequirements{
         }
     } 
 
+    /**
+     * toString method for passengers arraylist
+     * @return String names of passengers in car
+     */
+    public String toString(){
+        String result = "";
+        for (int i = 0; i < this.passengers.size(); i++){
+            result += this.passengers.get(i).getName() + " ";
+        }
+        return result;
+    }
 
     /**
-     * Print the car's manifest
+     * Print the list of passengers aboard the car, or a message if the car is empty
      */
     public void printManifest(){
         if(this.passengers.size() == 0){
@@ -75,13 +86,29 @@ public class Car implements CarRequirements{
         }else{
             System.out.println("Car manifest:");
             for (int i = 0; i < this.passengers.size(); i++){
-                System.out.println(this.passengers.get(i));
+                System.out.println(this.passengers.get(i).toString());
             }
         }
     } 
 
-    public static void main(){
+    public static void main(String[] args){
         //to test code
+        System.out.println("Testing Car class");
+        Car c = new Car(3);
+        Passenger p1 = new Passenger("Alice");  
+        Passenger p2 = new Passenger("Bob");
+        Passenger p3 = new Passenger("Charlie");
+        Passenger p4 = new Passenger("David");
+        
+        c.addPassenger(p1);
+        c.addPassenger(p2);
+        c.addPassenger(p3);
+        c.addPassenger(p4);
+        c.printManifest();
+        c.removePassenger(p2);
+        c.removePassenger(p4);
+        c.printManifest();    
+
     }
 
 }

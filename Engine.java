@@ -1,7 +1,7 @@
 public class Engine implements EngineRequirements {
 
     //attributes
-    private FuelType f;
+    private FuelType f;  
     private double curFuel;
     private double maxFuel;
 
@@ -59,7 +59,7 @@ public class Engine implements EngineRequirements {
         if (this.curFuel == 0) {
             return false;
         } else{
-            this.curFuel -= 0.5*this.curFuel;
+            this.curFuel -= this.maxFuel/5;
             System.out.println("Engine started! Fuel level: " + this.curFuel + "/" + this.maxFuel);
             return true;
         }
