@@ -22,7 +22,11 @@ public class Passenger implements PassengerRequirements{
      * @return true if passenger boards, false otherwise
      */
     public void boardCar(Car c) {
-        c.addPassenger(this);
+        if (c.addPassenger(this)){
+            System.out.println(this.name + " has boarded the car.");
+        } else {
+            System.out.println("No room in this car.");
+        }
     }
 
     /**
@@ -31,8 +35,22 @@ public class Passenger implements PassengerRequirements{
      * @return true if passenger gets off, false otherwise
      */ 
     public void getOffCar(Car c) {
-        c.removePassenger(this);
+        if (c.removePassenger(this)){
+            System.out.println(this.name + " has left the car.");
+        } else {
+            System.out.println("Passenger not in car.");
+        }
     }
 
+
+    public static void main(String[] args){
+        //to test code
+        System.out.println("Testing Passenger class");
+        Passenger p = new Passenger("Alice");
+        Car c = new Car(3);
+        p.boardCar(c);
+        p.getOffCar(c);
+        p.getOffCar(c);
+    }
 
 }

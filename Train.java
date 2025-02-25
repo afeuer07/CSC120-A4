@@ -14,11 +14,14 @@ public class Train implements TrainRequirements{
      */
     public Train(FuelType f, double curFuel, double maxFuel, int cars, int cap){
         this.engine = new Engine(f, curFuel, maxFuel);
-        for (int i = 0; i < cars; i++){
-            this.cars.add(new Car(cap));
-        }
         this.allCapacity = 0;
         this.allSeatsLeft = 0;
+        for (int i = 0; i < cars; i++){
+            Car car = new Car(cap);
+            this.cars.add(car);
+            this.allCapacity += car.getCapacity();
+            this.allSeatsLeft += car.seatsRemaining();
+        }
 
     }
 
@@ -31,10 +34,18 @@ public class Train implements TrainRequirements{
     }
 
     public int getMaxCapacity(){
+        this.allCapacity = 0;
+        for (int i = 0; i < cars.size(); i++){
+            this.allCapacity += cars.get(i).getCapacity();
+        }
         return this.allCapacity;
     }
 
     public int seatsRemaining(){
+        this.allSeatsLeft = 0;
+        for (int i = 0; i < cars.size(); i++){
+            this.allSeatsLeft += cars.get(i).seatsRemaining();
+        }
         return this.allSeatsLeft;
     }
 
@@ -45,5 +56,25 @@ public class Train implements TrainRequirements{
             cars.get(i).printManifest();
         }
     }
+
+
+    public static void main(String[] args){
+        // Testing Train class
+        System.out.println("Testing Train class");
+    
+        Train t = new Train(FuelType.STEAM, 100, 100, 3, 3);
+        Car c = t.getCar(0);
+        Passenger p = new Passenger("Alice");
+    
+        System.out.println("Adding Alice to car 0");
+        p.boardCar(c);  
+        t.printManifest();  
+        System.out.println("Seats Remaining: " + t.seatsRemaining());
+        System.out.println("Removing Alice from car 0");
+        p.getOffCar(c);  
+        t.printManifest();  
+        System.out.println("Seats Remaining: " + t.seatsRemaining());
+    }
+    
 
 }
