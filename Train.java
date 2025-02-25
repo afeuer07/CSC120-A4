@@ -25,14 +25,27 @@ public class Train implements TrainRequirements{
 
     }
 
+    /**
+     * Getter for engine
+     * @return Train's engine
+     */
     public Engine getEngine(){
         return this.engine;
     }
 
+    /**
+     * Getter for car
+     * @param i index of car
+     * @return Train's car at index i
+     */
     public Car getCar(int i){
         return this.cars.get(i);
     }
 
+    /**
+     * Returns total capacity of all cars in the train
+     * @return Train's capacity
+     */
     public int getMaxCapacity(){
         this.allCapacity = 0;
         for (int i = 0; i < cars.size(); i++){
@@ -41,6 +54,10 @@ public class Train implements TrainRequirements{
         return this.allCapacity;
     }
 
+    /**
+     * Returns total seats remaining in all cars in the train
+     * @return Train's seats remaining
+     */
     public int seatsRemaining(){
         this.allSeatsLeft = 0;
         for (int i = 0; i < cars.size(); i++){
@@ -49,6 +66,9 @@ public class Train implements TrainRequirements{
         return this.allSeatsLeft;
     }
 
+    /**
+     * Print list of all passengers aboard the train
+     */
     public void printManifest(){
         System.out.println("Train Manifest:");
         for (int i = 0; i < cars.size(); i++){
